@@ -30,7 +30,7 @@ public class UserDto {
     @Size(min = 1)
     private String email;
 
-    //private boolean isUsing2FA;
+    private boolean isUsing2FA;
 
     public String getFirstName() {
         return firstName;
@@ -72,11 +72,11 @@ public class UserDto {
         this.email = email;
     }
 
-    /*public boolean isUsing2FA() {
+    public boolean isUsing2FA() {
         return isUsing2FA;
     }
 
     public void setUsing2FA(boolean isUsing2FA) {
         this.isUsing2FA = isUsing2FA;
-    }*/
+    }
 }

@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
         newUser.setLastName(userDto.getLastName());
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
         newUser.setEmail(userDto.getEmail());
-        //newUser.setUsing2FA(userDto.isUsing2FA());
+        newUser.setUsing2FA(userDto.isUsing2FA());
         newUser.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
         return repository.save(newUser);
     }
