@@ -35,10 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username: %s", email));
         }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
+        boolean enabled = Boolean.TRUE;
+        boolean accountNonExpired = Boolean.TRUE;
+        boolean credentialsNonExpired = Boolean.TRUE;
+        boolean accountNonLocked = Boolean.TRUE;
         return  new org.springframework.security.core.userdetails.User
                 (user.getEmail(),
                         user.getPassword(), enabled, accountNonExpired,

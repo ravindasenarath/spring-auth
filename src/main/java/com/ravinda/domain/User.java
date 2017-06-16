@@ -22,6 +22,7 @@ public class User {
     @Column(length = 60)
     private String password;
 
+    @Column(name = "enabled")
     private boolean enabled;
 
     private boolean isUsing2FA;
