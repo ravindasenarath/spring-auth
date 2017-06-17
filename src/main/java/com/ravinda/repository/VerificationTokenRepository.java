@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
-//import java.util.stream.Stream;
+import java.util.stream.Stream;
 
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
@@ -15,7 +15,7 @@ public interface VerificationTokenRepository extends JpaRepository<VerificationT
 
     VerificationToken findByUser(User user);
 
-    //Stream<VerificationToken> findAllByExpiryDateLessThan(Date now);
+    Stream<VerificationToken> findAllByExpiryDateLessThan(Date now);
 
     void deleteByExpiryDateLessThan(Date now);
 
