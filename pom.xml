@@ -110,11 +110,8 @@
                     <target>1.8</target>
                 </configuration>
 			</plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.9.53</version>
-            </plugin>
 		</plugins>
 	</build>
+
+
 </project>
