@@ -16,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -59,6 +60,17 @@ public class UserServiceImpl implements UserService{
     public void createVerificationTokenForUser(User user, String token) {
         final VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
+    }
+
+    @Override
+    public VerificationToken generateNewTokenForUser(final String token){
+        VerificationToken vToken = tokenRepository.findByToken(token);
+        if(vToken == null){
+            throw new IllegalArgumentException(String.format("%s is not a verification token", token));
+        }
+        vToken.updateToken(UUID.randomUUID().toString());
+        vToken = tokenRepository.save(vToken);
+        return vToken;
     }
 
     @Override
