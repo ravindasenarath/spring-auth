@@ -8,6 +8,8 @@ import com.ravinda.repository.user.RoleRepository;
 import com.ravinda.repository.user.UserRepository;
 import com.ravinda.service.user.UserService;
 import com.ravinda.web.EmailExistsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.Calendar;
 
 @Service
 public class UserServiceImpl implements UserService{
+
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -42,7 +46,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User registerNewUserAccount(UserDto userDto) {
         if (emailExist(userDto.getEmail())) {
-            throw new EmailExistsException("There is an account with that email adress: " + userDto.getEmail());
+            throw new EmailExistsException("There is an account with that email address: " + userDto.getEmail());
         }
         final User newUser = new User();
 

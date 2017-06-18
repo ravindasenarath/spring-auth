@@ -5,6 +5,8 @@ import com.ravinda.dto.UserDto;
 import com.ravinda.event.OnRegistrationCompleteEvent;
 import com.ravinda.service.user.UserService;
 import com.ravinda.web.utils.GenericResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
@@ -25,6 +27,8 @@ import java.util.Locale;
 @Controller
 public class SignUpController {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private UserService userService;
 
@@ -44,15 +48,16 @@ public class SignUpController {
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<GenericResponse> registerUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
-        //LOGGER.debug("Registering user account with information: {}", accountDto);
-
+        LOGGER.debug("Registering user account with information: {}", accountDto);
         try {
             final User registered = userService.registerNewUserAccount(accountDto);
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
             return new ResponseEntity<>(new GenericResponse("success"), HttpStatus.OK);
         } catch (EmailExistsException e){
+            LOGGER.error("User already exist with given email", e);
             return new ResponseEntity<>(new GenericResponse("User already exist with given email", "UserAlreadyExist"), HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e){
+            LOGGER.error("Error happened", e);
             return new ResponseEntity<>(new GenericResponse(e.getMessage(), "InternalError"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
