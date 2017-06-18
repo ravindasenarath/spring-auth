@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}"/>
     <style>
         .password-verdict{
             color:#000;
         }
     </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script th:src="@{/resources/pwstrength.js}"></script>
+    <script th:src="@{/resources/js/jquery.min.js}"></script>
+    <script th:src="@{/resources/js/pwstrength.js}"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"/>
     <title th:text="#{label.form.title}">form</title>
 </head>
