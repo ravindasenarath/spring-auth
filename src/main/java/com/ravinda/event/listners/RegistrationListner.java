@@ -2,6 +2,7 @@ package com.ravinda.event.listners;
 
 import com.ravinda.domain.User;
 import com.ravinda.event.OnRegistrationCompleteEvent;
+import com.ravinda.service.email.MailService;
 import com.ravinda.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -23,7 +24,7 @@ public class RegistrationListner implements ApplicationListener<OnRegistrationCo
     private MessageSource messages;
 
     @Autowired
-    private JavaMailSender mailSender;
+    private MailService mailService;
 
     @Autowired
     private Environment env;
@@ -35,7 +36,7 @@ public class RegistrationListner implements ApplicationListener<OnRegistrationCo
         service.createVerificationTokenForUser(user, token);
 
         final SimpleMailMessage email = constructEmailMessage(event, user, token);
-        mailSender.send(email);
+        mailService.sendEmail(email);
     }
 
     //

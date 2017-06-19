@@ -67,8 +67,7 @@ public class SignUpController {
         final String result = userService.validateVerificationToken(token);
         if (result.equals("valid")) {
             final User user = userService.getUser(token);
-            //TODO logging
-            System.out.println(user);
+            LOGGER.info("User [{}] validated successfully", user);
             if (user.isUsing2FA()) {
                 model.addAttribute("qr", userService.generateQRUrl(user));
                 return "redirect:/qrcode.html?lang=" + locale.getLanguage();
