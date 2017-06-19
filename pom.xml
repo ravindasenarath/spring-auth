@@ -6,7 +6,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>spring-authentication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>authserver</name>
 	<description>Demo project for Spring Boot</description>
@@ -31,6 +31,13 @@
 
         <passay.version>1.0</passay.version>
         <rest-assured.version>2.4.0</rest-assured.version>
+
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+
+        <com.google.appengine.version>1.9.52</com.google.appengine.version>
+        <sendgrid-java.version>2.2.2</sendgrid-java.version>
+        <net.logstash.logback.version>4.8</net.logstash.logback.version>
 	</properties>
 
 	<dependencies>
@@ -80,7 +87,7 @@
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
-            <version>4.8</version>
+            <version>${net.logstash.logback.version}</version>
         </dependency>
 
         <!-- Password Validation -->
@@ -109,7 +116,7 @@
         <dependency>
             <groupId>com.sendgrid</groupId>
             <artifactId>sendgrid-java</artifactId>
-            <version>2.2.2</version>
+            <version>${sendgrid-java.version}</version>
         </dependency>
     </dependencies>
 
@@ -119,8 +126,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${com.google.appengine.version}</version>
+            </plugin>
 		</plugins>
 	</build>
-
-
 </project>
